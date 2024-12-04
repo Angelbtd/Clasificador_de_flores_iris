@@ -1,5 +1,5 @@
-# Entrenar y guardar el modelo
 import pickle
+import os
 from sklearn.datasets import load_iris
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
@@ -14,10 +14,14 @@ def train_and_save_model():
     model.fit(X_train, y_train)
 
     y_pred = model.predict(X_test)
-    print('Matriz de confusiÛn:
-', confusion_matrix(y_test, y_pred))
-    print('Reporte de clasificaciÛn:
-', classification_report(y_test, y_pred))
+    print('Matriz de confusi√≥n:\n', confusion_matrix(y_test, y_pred))
+    print('Reporte de clasificaci√≥n:\n', classification_report(y_test, y_pred))
+
+    # Crear la carpeta 'models' si no existe
+    os.makedirs('models', exist_ok=True)
 
     with open('models/decision_tree.pkl', 'wb') as f:
         pickle.dump(model, f)
+
+# Llamar a la funci√≥n para entrenar y guardar el modelo
+train_and_save_model()
